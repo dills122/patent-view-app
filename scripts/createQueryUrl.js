@@ -24,6 +24,13 @@ const querystringObj = {
 
 const stringyQueryStringObj = JSON.stringify(querystringObj);
 
+const optionsObj = {
+    per_page: 1000,
+    page: 1
+};
+
+
+
 console.log(stringyQueryStringObj);
 
 const url = new URL(apiUrl);
@@ -38,5 +45,7 @@ url.searchParams.append('f', JSON.stringify([
     'patent_title',
     'patent_abstract'
 ]));
+
+url.searchParams.append('o', JSON.stringify(optionsObj));
 
 console.log(url.href);

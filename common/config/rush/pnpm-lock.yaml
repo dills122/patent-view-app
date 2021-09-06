@@ -11102,6 +11102,12 @@ packages:
       tslib: 1.14.1
     dev: false
 
+  /rxjs/7.3.0:
+    resolution: {integrity: sha512-p2yuGIg9S1epc3vrjKf6iVb3RCaAYjYskkO+jHIaV0IjOPlJop4UnodOoFb2xeNwlguqLYvGw1b1McillYb5Gw==}
+    dependencies:
+      tslib: 2.1.0
+    dev: false
+
   /safe-buffer/5.1.2:
     resolution: {integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==}
     dev: false
@@ -13559,7 +13565,7 @@ packages:
     dev: false
 
   file:projects/uspto-patents-view-api.tgz:
-    resolution: {integrity: sha512-0zN/jzhXkDXBf1p7UBg+vV5WL2RKkrgkj5sB1fecyalXfI6cWG783/Ib2he4/9WVK1P6I4tkIBJScHAwVHneqg==, tarball: file:projects/uspto-patents-view-api.tgz}
+    resolution: {integrity: sha512-aNht5H8MkoosStLTc6rEGXBfvGhIDIZ5liNbKspyn2QNVn0iMGEZDEs1iZ75iTR+JAc2mhrSJXFQauXiDdkIgg==, tarball: file:projects/uspto-patents-view-api.tgz}
     name: '@rush-temp/uspto-patents-view-api'
     version: 0.0.0
     dependencies:
@@ -13579,6 +13585,7 @@ packages:
       lodash: 4.17.21
       mocha: 8.2.1
       prettier: 2.3.2
+      rxjs: 7.3.0
       sinon: 9.2.4
       ts-node: 10.2.1_c780171742f6906a053a603dfa210a4e
       typescript: 4.3.5
