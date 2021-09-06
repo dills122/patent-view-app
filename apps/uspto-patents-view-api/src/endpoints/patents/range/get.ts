@@ -3,17 +3,22 @@ import PatentConfig from '../config';
 import MainConfig from '../../../config';
 import path from 'path';
 import { EMPTY, from } from 'rxjs';
-import { expand, take, concatMap } from 'rxjs/operators';
+import { expand, take, map, reduce, tap } from 'rxjs/operators';
 import QueryBuilder, { QueryObject, SearchTerm } from '../../../query-system/build';
 
 const PAGE_SIZE = 1000;
 
-export interface RangeArgs {
+export interface Pagination {
+  pageSize?: number;
+  pages?: number;
+}
+
+export interface RangeArgs extends Pagination {
   startDate: string;
   endDate: string;
 }
 
-interface PatentResponse {
+export interface PatentResponse {
   patents: Patent[];
   count: number;
   total_patent_count: number;
@@ -56,31 +61,40 @@ function buildRangeQueryStringObject(args: RangeArgs): SearchTerm[] {
 }
 
 export default class Range {
+  private pageSize: number;
+  private pages: number;
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   between(args: RangeArgs, dataPoints: DataPoints = []) {
+    const { pageSize, ...rangeArgs } = args;
+    this.pageSize = pageSize || PAGE_SIZE;
+    this.pages = args.pages || 10;
     const queryObject = QueryBuilder.build({
       and: buildRangeQueryStringObject(args)
     });
     const requestArgs = {
-      args,
+      args: rangeArgs,
       dataPoints,
       queryParamObject: queryObject
     };
     return this.request(requestArgs, 1).pipe(
       expand((data, index) => {
         const { count } = data.body;
-        if (count < PAGE_SIZE) {
+        if (count < this.pageSize) {
           return EMPTY;
         }
-        return this.request(requestArgs, index++);
+        const nextPage = index + 1;
+        return this.request(requestArgs, nextPage);
       }),
-      concatMap((data) => {
-        return data.body.patents;
-      }),
-      take(10)
+      take(this.pages),
+      map((data) => [data.body]),
+      reduce((acc, data) => {
+        return acc.concat(data);
+      })
     );
   }
 
-  private request(
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  request(
     requestPayload: {
       args: RangeArgs;
       dataPoints: DataPoints;
@@ -94,7 +108,7 @@ export default class Range {
           q: JSON.stringify(requestPayload.queryParamObject),
           f: JSON.stringify(['patent_number', 'patent_date', 'patent_title', ...requestPayload.dataPoints]),
           o: JSON.stringify({
-            per_page: PAGE_SIZE,
+            per_page: this.pageSize,
             page
           })
         }
