@@ -394,5 +394,8 @@
   }, {
     "packageName": "site",
     "projectFolder": "apps/site"
+  }, {
+    "packageName": "uspto-patents-view-api",
+    "projectFolder": "apps/uspto-patents-view-api"
   }]
 }
