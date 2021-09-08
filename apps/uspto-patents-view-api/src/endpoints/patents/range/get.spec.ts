@@ -3,14 +3,14 @@ import { describe } from 'mocha';
 
 import { lastValueFrom } from 'rxjs';
 
-import Getter from './get';
+import { Range } from './get';
 
 describe('Endpoints::', () => {
   describe('Patents::', () => {
     describe('Range::', () => {
       describe.only('Get::', () => {
         it('should test it out', async () => {
-          const getter = new Getter();
+          const getter = new Range();
           const results = await lastValueFrom(
             getter.between({
               startDate: '2021-03-01',

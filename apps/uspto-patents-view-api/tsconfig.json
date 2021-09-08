@@ -3,5 +3,7 @@
   "compilerOptions": {
     "declarationDir": "./types",
     "moduleResolution": "Node"
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*.spec.ts"]
 }

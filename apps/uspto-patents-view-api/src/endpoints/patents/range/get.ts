@@ -6,7 +6,7 @@ import { EMPTY, from } from 'rxjs';
 import { expand, take, map, reduce } from 'rxjs/operators';
 import QueryBuilder, { QueryObject, SearchTerm } from '../../../query-system/build';
 
-const PAGE_SIZE = 1000;
+const PAGE_SIZE = 50;
 
 export interface Pagination {
   pageSize?: number;
@@ -60,7 +60,7 @@ function buildRangeQueryStringObject(args: RangeArgs): SearchTerm[] {
   ];
 }
 
-export default class Range {
+export class Range {
   private pageSize: number;
   private pages: number;
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -87,9 +87,9 @@ export default class Range {
         return this.request(requestArgs, nextPage);
       }),
       take(this.pages),
-      map((data) => [data]),
+      map((data) => [...data.patents]),
       reduce((acc, data) => {
-        return acc.concat(data);
+        return acc.concat(...data);
       })
     );
   }
