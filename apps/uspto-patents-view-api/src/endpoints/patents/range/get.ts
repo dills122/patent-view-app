@@ -3,7 +3,7 @@ import PatentConfig from '../config';
 import MainConfig from '../../../config';
 import path from 'path';
 import { EMPTY, from } from 'rxjs';
-import { expand, take, map, reduce, tap } from 'rxjs/operators';
+import { expand, take, map, reduce } from 'rxjs/operators';
 import QueryBuilder, { QueryObject, SearchTerm } from '../../../query-system/build';
 
 const PAGE_SIZE = 1000;
@@ -78,7 +78,8 @@ export default class Range {
     };
     return this.request(requestArgs, 1).pipe(
       expand((data, index) => {
-        const { count } = data.body;
+        const { count } = data;
+        console.log(count);
         if (count < this.pageSize) {
           return EMPTY;
         }
@@ -86,7 +87,7 @@ export default class Range {
         return this.request(requestArgs, nextPage);
       }),
       take(this.pages),
-      map((data) => [data.body]),
+      map((data) => [data]),
       reduce((acc, data) => {
         return acc.concat(data);
       })
@@ -103,7 +104,7 @@ export default class Range {
     page: number
   ) {
     return from(
-      got<PatentResponse>(path.join(MainConfig.apiUrl, PatentConfig.subsdirectory, PatentConfig.endpoint), {
+      got<string>(path.join(MainConfig.apiUrl, PatentConfig.subsdirectory, PatentConfig.endpoint), {
         searchParams: {
           q: JSON.stringify(requestPayload.queryParamObject),
           f: JSON.stringify(['patent_number', 'patent_date', 'patent_title', ...requestPayload.dataPoints]),
@@ -112,6 +113,10 @@ export default class Range {
             page
           })
         }
+      })
+    ).pipe(
+      map((data) => {
+        return JSON.parse(data.body) as PatentResponse;
       })
     );
   }
