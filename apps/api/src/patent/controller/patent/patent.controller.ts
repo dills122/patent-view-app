@@ -20,7 +20,9 @@ export class PatentController {
       return await lastValueFrom(
         patent.between({
           startDate: query.startDate,
-          endDate: query.endDate
+          endDate: query.endDate,
+          pages: 3,
+          pageSize: 10
         })
       );
     } catch (err) {
