@@ -14,11 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(private patentService: PatentService) {}
 
   ngOnInit(): void {
-    this.recentPattens$ = this.patentService.get();
-    this.patentService.test().pipe(
-      tap((data) => {
-        console.log(data);
-      })
-    );
+    // this.recentPattens$ = this.patentService.get();
+    this.recentPattens$ = this.patentService.test();
   }
 }

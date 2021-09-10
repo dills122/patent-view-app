@@ -12,7 +12,5 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["src/**/*.spec.ts"]
+  }
 }

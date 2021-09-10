@@ -18,6 +18,7 @@ export class PatentService {
   }
 
   test() {
-    return this.httpService.get<string>('http://localhost:3000/patent');
+    console.log('?');
+    return this.httpService.get<Patent[]>('http://localhost:3000/');
   }
 }

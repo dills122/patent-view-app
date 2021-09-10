@@ -5,7 +5,7 @@
         <tr *ngFor="let patents of recentPattens$ | async">
           <td>{{patents.patent_title}}</td>
           <td>{{patents.patent_number}}</td>
-          <td>{{patents.patent_date | shortDate}}</td>
+          <td>{{patents.patent_date | date}}</td>
         </tr>
       </table>
     </div>
