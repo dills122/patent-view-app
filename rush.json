@@ -389,10 +389,13 @@
    * 3. It's useful to have a centralized inventory of all projects and their important metadata.
    */
   "projects": [{
-    "packageName": "api",
-    "projectFolder": "apps/api"
+    "packageName": "nestjs-api",
+    "projectFolder": "apps/nestjs-api"
   }, {
     "packageName": "site",
     "projectFolder": "apps/site"
+  }, {
+    "packageName": "uspto-patents-view-api",
+    "projectFolder": "apps/uspto-patents-view-api"
   }]
 }

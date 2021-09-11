@@ -1,1 +1,22 @@
-<p>home works!</p>
+<div class="container">
+  <div class="row justify-content-start">
+    <div class="col">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Patent #</th>
+            <th>Creation Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let patents of recentPattens$ | async">
+            <td>{{patents.patent_title}}</td>
+            <td>{{patents.patent_number}}</td>
+            <td>{{patents.patent_date | date}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
