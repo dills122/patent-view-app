@@ -275,7 +275,7 @@
   },
 
   "repository": {
-    "url": "https://github.com/dills122/patent-view-api",
+    "url": "https://github.com/dills122/patent-view-app",
     "defaultBranch": "master",
     "defaultRemote": "origin"
   },
@@ -369,8 +369,5 @@
   }, {
     "packageName": "site",
     "projectFolder": "apps/site"
-  }, {
-    "packageName": "uspto-patents-view-api",
-    "projectFolder": "apps/uspto-patents-view-api"
   }]
 }
