@@ -1,7 +1,7 @@
 {
   "name": "uspto-patents-view-api",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.2",
+  "description": "An api wrapper for the patent view api run by the uspto",
   "main": "src/index.js",
   "scripts": {
     "test": "mocha -r ts-node/register \"src/**/*.spec.ts\"",
@@ -9,11 +9,21 @@
     "compile": "tsc",
     "clean": "tsc --build --clean && rm -r ./types",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix"
+    "lint:fix": "eslint . --ext .ts --fix",
+    "prepublishOnly": "npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "uspto",
+    "patents",
+    "patent-view",
+    "api-wrapper",
+    "inventors",
+    "uspto-api-wrapper",
+    "patent-api-wrapper",
+    "patent-view-api-wrapper"
+  ],
+  "author": "Dylan Steele",
+  "license": "MIT",
   "devDependencies": {
     "@types/got": "^9.6.12",
     "@types/lodash": "^4.14.172",
@@ -37,5 +47,12 @@
     "got": "^11.8.2",
     "lodash": "^4.17.21",
     "rxjs": "~7.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dills122/patent-view-api"
+  },
+  "bugs": {
+    "url": "https://github.com/dills122/patent-view-api/issues"
   }
 }
