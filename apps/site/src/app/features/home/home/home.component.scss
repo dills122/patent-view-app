@@ -1,0 +1,12 @@
+@import '../../../../themes.scss';
+
+table {
+    color: nb-theme(color-basic-600);
+    font-weight: 700;
+
+    thead {
+        color: nb-theme(color-basic-700);
+        background-color: nb-theme(background-alternative-color-3);
+        font-weight: 900;
+    }
+}
